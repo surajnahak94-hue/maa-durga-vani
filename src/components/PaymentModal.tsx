@@ -32,7 +32,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose }) =
         </div>
 
         <a 
-          href="https://wa.me/918117860911?text=Namaste! I have paid ₹149 for the Navratri Puja Vidhi Kit. I am sending my payment screenshot. Please verify my payment and send me the PDF. Thank you!"
+          href="https://wa.me/918117860911?text=Namaste%21%20I%20have%20paid%20%E2%82%B9149%20for%20the%20Navratri%20Puja%20Vidhi%20Kit.%20I%20am%20sending%20my%20payment%20screenshot.%20Please%20verify%20my%20payment%20and%20send%20me%20the%20PDF.%20Thank%20you%21"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#128C7E] transition mb-6"
