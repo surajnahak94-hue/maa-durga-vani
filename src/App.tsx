@@ -13,7 +13,12 @@ import { ExploreProducts } from './components/ExploreProducts';
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
+  const [currentProduct, setCurrentProduct] = useState({ name: 'Navratri Puja Vidhi Kit', price: '₹149' });
+
+  const openModal = (name = 'Navratri Puja Vidhi Kit', price = '₹149') => {
+    setCurrentProduct({ name, price });
+    setIsModalOpen(true);
+  };
   const closeModal = () => setIsModalOpen(false);
 
   return (
@@ -28,7 +33,13 @@ export default function App() {
       <FAQSection />
       <FinalCTA onOpenPayment={openModal} />
       <Footer />
-      <PaymentModal isOpen={isModalOpen} onClose={closeModal} />
+      <PaymentModal 
+        isOpen={isModalOpen} 
+        onClose={closeModal} 
+        productName={currentProduct.name} 
+        price={currentProduct.price}
+        whatsappMessage={`Namaste! I have paid ${currentProduct.price} for the ${currentProduct.name}. I am sending my payment screenshot. Please verify my payment and send me the PDF. Thank you!`}
+      />
       <FloatingWhatsApp />
     </div>
   );

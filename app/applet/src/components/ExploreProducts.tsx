@@ -8,14 +8,41 @@ const SectionHeader = ({ title }: { title: string }) => (
   <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#8B0000] text-center mb-12">{title}</h2>
 );
 
-const ProductCard = ({ title, price, originalPrice, image, objectFit = 'object-cover', onOpenPayment }: { title: string, price?: string, originalPrice?: string, image?: string, objectFit?: string, onOpenPayment?: (productName: string, price: string) => void }) => (
+const ProductCard = ({ title, price, originalPrice, image, objectFit = 'object-cover', showBadge = false, onOpenPayment }: { title: string, price?: string, originalPrice?: string, image?: string, objectFit?: string, showBadge?: boolean, onOpenPayment?: (productName: string, price: string) => void }) => (
   <div className="bg-white p-6 rounded-xl shadow-sm border border-[#D4AF37]/20 hover:border-[#D4AF37]/50 transition-all hover:shadow-lg flex flex-col">
-    <div className="aspect-[3/4] bg-stone-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
+    <div className="relative aspect-[3/4] bg-stone-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
       {image ? (
         <img src={image} alt={title} className={`w-full h-full ${objectFit}`} />
       ) : (
         <span className="text-stone-400 font-serif italic">Guide Cover</span>
       )}
+{showBadge && (
+  <div
+    style={{
+      position: 'absolute',
+      right: '12px',
+      bottom: '12px',
+      zIndex: 9999,
+      background: '#FFF4D6',
+      border: '3px solid #D4AF37',
+      borderRadius: '50%',
+      width: '90px',
+      height: '90px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.25)'
+    }}
+  >
+    <span style={{fontSize:'13px', textDecoration:'line-through', color:'#666'}}>
+      ₹999
+    </span>
+    <span style={{fontSize:'27px', fontWeight:'bold', color:'#8B0000'}}>
+      ₹149
+    </span>
+  </div>
+)}
     </div>
     <h4 className="text-xl font-bold text-[#8B0000] mb-2">{title}</h4>
     <p className="text-stone-600 mb-4 flex-grow">Hindi Digital PDF eBook</p>
@@ -42,7 +69,7 @@ export const ExploreProducts = ({ onOpenPayment }: { onOpenPayment: (productName
         <ProductCard title="Navratri Puja Vidhi Kit" price="₹149" image={navratriEbookCover} onOpenPayment={onOpenPayment} />
         <ProductCard title="Lakshmi Puja Guide" price="₹199" originalPrice="₹999" image={laxmiEbookCover} onOpenPayment={onOpenPayment} />
         <ProductCard title="Kali Puja Guide" price="₹199" originalPrice="₹999" image={kaliEbookCover} onOpenPayment={onOpenPayment} />
-        <ProductCard title="Home Puja Guide" price="₹149" originalPrice="₹999" image={homePujaEbookCover} objectFit="object-contain" onOpenPayment={onOpenPayment} />
+        <ProductCard title="Home Puja Guide" price="₹149" originalPrice="₹999" image={homePujaEbookCover} objectFit="object-contain" showBadge={true} onOpenPayment={onOpenPayment} />
       </div>
       <div className="mt-16 text-center">
         <h3 className="text-2xl font-serif font-bold text-[#8B0000] mb-4">More Sacred Guides Coming Soon</h3>

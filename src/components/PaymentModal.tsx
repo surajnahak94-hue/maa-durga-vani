@@ -4,10 +4,15 @@ import qrCode from '../assets/payment-qr.jpg';
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
+  productName: string;
+  price: string;
+  whatsappMessage: string;
 }
 
-export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose }) => {
+export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, productName, price, whatsappMessage }) => {
   if (!isOpen) return null;
+
+  const encodedMessage = encodeURIComponent(whatsappMessage);
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -18,21 +23,21 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose }) =
         </div>
         
         <div className="space-y-4 mb-6">
-          <p className="font-bold text-lg">Navratri Puja Vidhi Kit – Digital PDF eBook</p>
-          <p className="text-xl font-bold text-[#E34234]">Amount to Pay: ₹149</p>
+          <p className="font-bold text-lg">{productName} – Digital PDF eBook</p>
+          <p className="text-xl font-bold text-[#E34234]">Amount to Pay: {price}</p>
           
           <img src={qrCode} alt="PhonePe QR Code" className="w-full max-w-[250px] mx-auto rounded-lg border-2 border-[#D4AF37]" />
         </div>
 
         <div className="text-sm text-stone-700 space-y-2 mb-6 text-left bg-white p-4 rounded-lg border border-[#D4AF37]/20">
           <p>1. Scan the QR using any UPI app.</p>
-          <p>2. Pay exactly ₹149.</p>
+          <p>2. Pay exactly {price}.</p>
           <p>3. Save the successful payment screenshot.</p>
           <p>4. Contact us with the payment screenshot to receive the PDF.</p>
         </div>
 
         <a 
-          href="https://wa.me/918117860911?text=Namaste%21%20I%20have%20paid%20%E2%82%B9149%20for%20the%20Navratri%20Puja%20Vidhi%20Kit.%20I%20am%20sending%20my%20payment%20screenshot.%20Please%20verify%20my%20payment%20and%20send%20me%20the%20PDF.%20Thank%20you%21"
+          href={`https://wa.me/918117860911?text=${encodedMessage}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#128C7E] transition mb-6"
